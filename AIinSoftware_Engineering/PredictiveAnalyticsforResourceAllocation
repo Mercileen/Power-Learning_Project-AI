@@ -1,0 +1,44 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, f1_score, classification_report
+from sklearn.preprocessing import LabelEncoder
+
+# Load dataset (replace path with your local path or Kaggle dataset path)
+data = pd.read_csv("breast_cancer.csv")
+
+# Preview data
+data.head()
+
+# Drop unnecessary columns (like ID)
+if 'id' in data.columns:
+    data = data.drop('id', axis=1)
+
+# Encode target labels if necessary
+# Example: Suppose 'diagnosis' column is target
+le = LabelEncoder()
+data['diagnosis'] = le.fit_transform(data['diagnosis'])  # Malignant=1, Benign=0
+
+# Check for missing values
+print(data.isnull().sum())
+# Fill missing values (if any)
+data = data.fillna(data.mean())
+
+# Features and target
+X = data.drop('diagnosis', axis=1)  # features
+y = data['diagnosis']               # target
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+y_pred = rf_model.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)  # For binary target, use default
+
+print("Accuracy:", accuracy)
+print("F1-score:", f1)
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+

@@ -1,0 +1,13 @@
+open https://example.com/login
+type username_field test_user
+type password_field correct_password
+click login_button
+assertText welcome_message "Welcome, test_user!"
+
+type username_field test_user
+type password_field wrong_password
+click login_button
+assertText error_message "Invalid credentials"
+
+
+AI-driven automated testing significantly improves software quality and efficiency compared to traditional manual testing. By using tools like Selenium IDE with AI plugins or Testim.io, repetitive test cases, such as login validation, can be executed automatically, saving time and reducing human error. AI enhances test reliability by adapting to UI changes, which prevents flaky tests and reduces maintenance overhead. It also increases test coverage by exploring multiple execution paths that manual testers may overlook. Predictive analytics provided by AI can identify components most likely to fail, allowing teams to focus on high-risk areas. Running automated tests generates immediate feedback, enabling faster bug detection and continuous integration. Overall, AI-powered testing ensures higher accuracy, faster execution, and scalable coverage, making it an indispensable tool for modern software development, particularly in validating critical functionality like login authentication.
